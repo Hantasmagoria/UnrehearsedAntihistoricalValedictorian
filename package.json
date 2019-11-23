@@ -1,0 +1,27 @@
+{
+  "name": "shana",
+  "description": "https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist",
+  "version": "0.0.0",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "request": "^2.81.0"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist/issues"
+  },
+  "homepage": "https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist#readme"
+}
