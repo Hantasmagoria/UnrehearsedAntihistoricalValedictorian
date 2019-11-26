@@ -1,6 +1,6 @@
 {
   "name": "shana",
-  "description": "https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist",
+  "description": "https://github.com/Hantasmagoria/UnrehearsedAntihistoricalValedictorian",
   "version": "0.0.0",
   "main": "bot.js",
   "scripts": {
@@ -16,12 +16,12 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist.git"
+    "url": "git+https://github.com/Hantasmagoria/UnrehearsedAntihistoricalValedictorian.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist/issues"
+    "url": "https://github.com/Hantasmagoria/UnrehearsedAntihistoricalValedictorian/issues"
   },
-  "homepage": "https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist#readme"
+  "homepage": "https://github.com/Hantasmagoria/UnrehearsedAntihistoricalValedictorian#readme"
 }
