@@ -19,7 +19,7 @@
 
 ## Usage
 
-![Demo gif](docs%5Cmedia%5Cdemogif-%20quote.gif)
+![Demo gif](docs/media/demogif-quote.gif)
 
 ### `>quote`
 
