@@ -23,7 +23,7 @@
 
 ### `>quote`
 
-> > quote [messageID]
+> `>quote [messageID]
 
 (developer mode required)
 
