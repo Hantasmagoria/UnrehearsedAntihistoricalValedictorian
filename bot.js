@@ -21,42 +21,20 @@ client.on("message", message => {
       console.log("Quote command help requested at " + message.channel);
       message.channel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
-      let originchannel = message.channel;
-      for (const channelIdentifier in originchannel.guild) {
-        if (originchannel.guild.hasOwnProperty(channelIdentifier)) {
-          const channelOne = originchannel.guild[channelIdentifier];
-          channelOne
-            .fetchMessage(args[0])
-            .then(
-              originchannel.send(
-                new Discord.RichEmbed()
-                  .setTitle("Quote from " + message.author.username)
-                  .setAuthor(message.author.username, message.author.avatarURL)
-                  .setColor(0xc736e5)
-                  .setDescription(message.content)
-                  .setTimestamp(message.createdTimestamp)
-              )
-            )
-            .catch(console.error);
-        }
-      }
-
-      // // Deprecating:
-      // if (message.channel == 0) {
-      //   message.channel
-      //     .fetchMessage(args[0])
-      //     .then(message =>
-      //       message.channel.send(
-      //         new Discord.RichEmbed()
-      //           .setTitle("Quote from " + message.author.username)
-      //           .setAuthor(message.author.username, message.author.avatarURL)
-      //           .setColor(0xc736e5)
-      //           .setDescription(message.content)
-      //           .setTimestamp(message.createdTimestamp)
-      //         // .setURL(message.url) removed to see if the link is still there
-      //       )
-      //     )
-      // }
+      message.channel
+        .fetchMessage(args[0])
+        .then(message =>
+          message.channel.send(
+            new Discord.RichEmbed()
+              .setTitle("Quote from " + message.author.username)
+              .setAuthor(message.author.username, message.author.avatarURL)
+              .setColor(0xc736e5)
+              .setDescription(message.content)
+              .setTimestamp(message.createdTimestamp)
+              .setURL(message.url)
+          )
+        )
+        .catch(console.error);
     }
   }
 });
