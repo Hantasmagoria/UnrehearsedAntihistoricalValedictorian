@@ -11,15 +11,14 @@ client.on("message", message => {
     .split(/ +/g);
   let command = args.shift().toLowerCase();
 
-  // Quote Command
   if (command === "quote") {
-    // console.log(
-    //   "Initiated Quote command. \n",
-    //   `${args[0] === "?" ? "" : "Quoting messageId " + args[0]} \n`,
-    //   `sending to channel ${message.channel.name} in ${message.guild}`
-    // );
+    console.log(
+      "Initiated Quote command. \n",
+      `${args[0] === "?" ? "" : "Quoting messageId " + args[0]} \n`,
+      `sending to channel ${message.channel.name} in ${message.guild}`
+    );
     if (args[0] === "?") {
-      // console.log("Quote command help requested at " + message.channel);
+      console.log("Quote command help requested at " + message.channel);
       message.channel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
       const searchOtherChannels = () => {
@@ -52,4 +51,4 @@ client.on("message", message => {
 client
   .login(`${process.env.BOT_TOKEN}`)
   .then(console.log("I am ready!"))
-  .catch(console.error);
+  .catch(console.error); //BOT_TOKEN set in heroku as a config var, setting already done. I think.
