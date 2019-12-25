@@ -23,9 +23,9 @@ client.on("message", message => {
       message.channel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
       let originchannel = message.channel;
-      for (const channelIdentifier in message.guild) {
-        if (message.guild.hasOwnProperty(channelIdentifier)) {
-          const channelOne = message.guild[channelIdentifier];
+      for (const channelIdentifier in originchannel.guild) {
+        if (originchannel.guild.hasOwnProperty(channelIdentifier)) {
+          const channelOne = originchannel.guild[channelIdentifier];
           channelOne
             .fetchMessage(args[0])
             .then(
