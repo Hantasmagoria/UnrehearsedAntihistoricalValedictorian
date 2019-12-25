@@ -23,6 +23,12 @@ client.on("message", message => {
     } else if (typeof parseInt(args[0]) === "number") {
       const searchOtherChannels = () => {
         console.log("current server is " + message.channel.guild);
+        for (const channel in message.channel.guild.channels) {
+          if (message.channel.guild.channels.hasOwnProperty(channel)) {
+            const element = message.channel.guild.channels[channel];
+            console.log(element);
+          }
+        }
       };
 
       message.channel
@@ -39,7 +45,7 @@ client.on("message", message => {
           )
         )
         .catch(error => {
-          console.log("errorcode = " + error.code);
+          // console.log("errorcode = " + error.code);
           if (error.code == 10008) {
             searchOtherChannels();
           }
