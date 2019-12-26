@@ -52,17 +52,16 @@ client.on("message", message => {
         });
 
         // console.log(channelist);
-        console.log(client.channels.array());
+        // console.log(client.channels.array());
         for (i = 0; i < channelist.length; i++) {
-          msg = client.channels
-            .find("id", channelist[i])
-            .fetchMessage(args[0])
-            .catch(error => {
-              return error.code == 10008
-                ? console.log("not found in " + channelist[i])
-                : error.code;
-            });
-          sEmbed(msg);
+          msg = client.channels.find("id", channelist[i]);
+
+          fetchmsg = msg.fetchMessage(args[0]).catch(error => {
+            return error.code == 10008
+              ? console.log("not found in " + channelist[i])
+              : error.code;
+          });
+          sEmbed(fetchmsg);
         }
         // message.guild.channels.map(_channel => {
         //   const fetched = _channel.fetchMessage(args[0]).catch(error => {
