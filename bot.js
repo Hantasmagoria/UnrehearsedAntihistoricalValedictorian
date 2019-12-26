@@ -35,7 +35,7 @@ client.on("message", async message => {
       console.log("Quote command help requested at " + originalChannel);
       originalChannel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
-      const searchOtherChannels = () => {
+      const searchOtherChannels = async () => {
         console.log("current server is " + message.guild);
         // This console.log works:
         // console.log("Channel List: " + message.guild.channels.array());
