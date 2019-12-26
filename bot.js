@@ -51,8 +51,8 @@ client.on("message", message => {
           channelist.push(_channel.id);
         });
 
-        console.log(channelist);
-
+        // console.log(channelist);
+        console.log(client.channels.array());
         for (i = 0; i < channelist.length; i++) {
           msg = client.channels
             .find("id", channelist[i])
