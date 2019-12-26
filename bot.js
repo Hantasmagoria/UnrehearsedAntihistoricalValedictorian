@@ -57,7 +57,7 @@ client.on("message", message => {
             .fetchMessage(args[0])
             .catch(error => {
               return error.code == 10008
-                ? console.log("not found in " + _channel.name)
+                ? console.log("not found in " + channelist[i])
                 : error.code;
             });
           sEmbed(msg);
