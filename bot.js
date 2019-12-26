@@ -15,17 +15,12 @@ client.on("message", message => {
   let command = args.shift().toLowerCase();
 
   if (command === "quote") {
-    // console.log(
-    //   "Initiated Quote command. \n",
-    //   `${args[0] === "?" ? "" : "Quoting messageId " + args[0]} \n`,
-    //   `sending to channel ${message.channel.name} in ${message.guild}`
-    // );
-
     const originalChannel = message.channel;
     const sEmbed = msg => {
       if (!msg.content) {
         return;
       }
+      message.delete().catch(console.error);
       originalChannel.send(
         msg.url,
         new Discord.RichEmbed()
@@ -37,45 +32,28 @@ client.on("message", message => {
     };
 
     if (args[0] === "?") {
-      console.log("Quote command help requested at " + originalChannel);
       originalChannel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
       const searchOtherChannels = () => {
-        // console.log("current server is " + message.guild);
-        // This console.log works:
-        // console.log(message.guild.channels.array());
         let channelist = [];
 
         message.guild.channels.map(_channel => {
           channelist.push(_channel.id);
         });
 
-        // console.log(channelist);
-        // console.log(client.channels.array());
         for (i = 0; i < channelist.length; i++) {
           findchannel = client.channels.get(channelist[i]);
           if (findchannel && findchannel.type == "text") {
-            // console.log(findmsg);
             findchannel
               .fetchMessage(args[0])
               .then(fetchedmsg => {
                 sEmbed(fetchedmsg);
               })
               .catch(error => {
-                return error.code == 10008
-                  ? console.log("not found in " + channelist[i])
-                  : error.code;
+                return error.code;
               });
           }
         }
-        // message.guild.channels.map(_channel => {
-        //   const fetched = _channel.fetchMessage(args[0]).catch(error => {
-        //     return error.code == 10008
-        //       ? console.log("not found in " + _channel.name)
-        //       : error.code;
-        //   });
-        //   sEmbed(fetched);
-        // });
       };
 
       originalChannel
