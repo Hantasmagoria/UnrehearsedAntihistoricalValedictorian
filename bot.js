@@ -4,6 +4,7 @@ const config = require("./config.json");
 client.config = config;
 
 client.on("message", message => {
+  let originMessage = message;
   let prefix = client.config.prefix;
   let args = message.content
     .slice(prefix.length)
@@ -24,10 +25,8 @@ client.on("message", message => {
     } else if (typeof parseInt(args[0]) === "number") {
       const searchOtherChannels = () => {
         console.log("current server is " + message.guild);
-        console.log("channel list: " + message.guild.channels);
-        message.guild.channels.map(channel => {
-          console.log(channel.key, " : ", channel.value);
-        });
+        console.log("channel list: ");
+        console.log(message.guild.channels.array());
       };
 
       originalChannel
