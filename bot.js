@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-client.config = config;
 
-client.on("message", message => {
-  let originMessage = message;
-  let prefix = client.config.prefix;
+client.on("message", async message => {
+  if (message.author.bot) return;
+  if (message.content.indexOf(config.prefix) !== 0) return;
+  let prefix = config.prefix;
   let args = message.content
     .slice(prefix.length)
     .trim()
@@ -18,7 +18,19 @@ client.on("message", message => {
       `${args[0] === "?" ? "" : "Quoting messageId " + args[0]} \n`,
       `sending to channel ${message.channel.name} in ${message.guild}`
     );
+
     const originalChannel = message.channel;
+    const sEmbed = (msg) => {
+      originalChannel.send(
+        msg.url,
+        new Discord.RichEmbed()
+          .setAuthor(msg.author.username, msg.author.avatarURL)
+          .setColor(0xc736e5)
+          .setDescription(msg.content)
+          .setTimestamp(msg.createdTimestamp)
+      )
+    }
+
     if (args[0] === "?") {
       console.log("Quote command help requested at " + originalChannel);
       originalChannel.send("Example usage: ```>quote 645305062230589450 ```");
@@ -28,38 +40,16 @@ client.on("message", message => {
         // This console.log works:
         // console.log("Channel List: " + message.guild.channels.array());
         message.guild.channels.map(_channel => {
-          _channel.channel
-            .fetchMessage(args[0])
-            .then(message => {
-              originalChannel.send(
-                message.url,
-                new Discord.RichEmbed()
-                  .setAuthor(message.author.username, message.author.avatarURL)
-                  .setColor(0xc736e5)
-                  .setDescription(message.content)
-                  .setTimestamp(message.createdTimestamp)
-              );
-            })
-            .catch(() =>
-              console.log("quoted message not found in " + channel.name)
-            );
+          const fetched = await _channel.fetchMessage(args[0]).catch(error =>{return error.code==10008?console.log("not found in "+_channel.name):error.code})
+          sEmbed(fetched);
         });
       };
 
       originalChannel
         .fetchMessage(args[0])
-        .then(message =>
-          originalChannel.send(
-            message.url,
-            new Discord.RichEmbed()
-              .setAuthor(message.author.username, message.author.avatarURL)
-              .setColor(0xc736e5)
-              .setDescription(message.content)
-              .setTimestamp(message.createdTimestamp)
-          )
+        .then(message => sEmbed(message)
         )
         .catch(error => {
-          // console.log("errorcode = " + error.code);
           if (error.code == 10008) {
             searchOtherChannels();
           }
