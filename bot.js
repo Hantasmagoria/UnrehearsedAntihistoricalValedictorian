@@ -25,10 +25,9 @@ client.on("message", message => {
       const searchOtherChannels = () => {
         console.log("current server is " + message.guild);
         console.log("channel list: " + message.guild.channels);
-        for (const channel in message.guild.channels) {
-          const element = message.guild.channels[channel];
-          console.log(element);
-        }
+        message.guild.channels.map(channel => {
+          console.log(channel.key, " : ", channel.value);
+        });
       };
 
       originalChannel
