@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
+client.on("error", console.error);
+
 client.on("message", message => {
   if (message.author.bot) return;
   if (message.content.indexOf(config.prefix) !== 0) return;
@@ -21,7 +23,9 @@ client.on("message", message => {
 
     const originalChannel = message.channel;
     const sEmbed = msg => {
-      console.log(msg.content);
+      if (!msg.content) {
+        return;
+      }
       originalChannel.send(
         msg.url
         // ,
@@ -40,15 +44,15 @@ client.on("message", message => {
       const searchOtherChannels = () => {
         // console.log("current server is " + message.guild);
         // This console.log works:
-        // console.log("Channel List: " + message.guild.channels.array());
-        message.guild.channels.map(_channel => {
-          const fetched = _channel.fetchMessage(args[0]).catch(error => {
-            return error.code == 10008
-              ? console.log("not found in " + _channel.name)
-              : error.code;
-          });
-          sEmbed(fetched);
-        });
+        console.log("Channel List: " + message.guild.channels.array());
+        // message.guild.channels.map(_channel => {
+        //   const fetched = _channel.fetchMessage(args[0]).catch(error => {
+        //     return error.code == 10008
+        //       ? console.log("not found in " + _channel.name)
+        //       : error.code;
+        //   });
+        //   sEmbed(fetched);
+        // });
       };
 
       originalChannel
@@ -66,4 +70,4 @@ client.on("message", message => {
 client
   .login(`${process.env.BOT_TOKEN}`)
   .then(console.log("I am ready!"))
-  .catch(console.error); //BOT_TOKEN set in heroku as a config var, setting already done. I think.
+  .catch(console.error);
