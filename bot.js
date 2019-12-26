@@ -44,16 +44,18 @@ client.on("message", message => {
       const searchOtherChannels = () => {
         // console.log("current server is " + message.guild);
         // This console.log works:
-        console.log(message.guild.channels.array());
+        // console.log(message.guild.channels.array());
         let channelist = [];
 
         message.guild.channels.map(_channel => {
           channelist.push(_channel.id);
         });
 
+        console.log(channelist);
+
         for (i = 0; i < channelist.length; i++) {
           msg = client.channels
-            .get(channelist[i])
+            .find("id", channelist[i])
             .fetchMessage(args[0])
             .catch(error => {
               return error.code == 10008
