@@ -28,7 +28,21 @@ client.on("message", message => {
         // This console.log works:
         // console.log("Channel List: " + message.guild.channels.array());
         message.guild.channels.map(channel => {
-          console.log(channel.name);
+          channel
+            .fetchMessage(args[0])
+            .then(message => {
+              originalChannel.send(
+                message.url,
+                new Discord.RichEmbed()
+                  .setAuthor(message.author.username, message.author.avatarURL)
+                  .setColor(0xc736e5)
+                  .setDescription(message.content)
+                  .setTimestamp(message.createdTimestamp)
+              );
+            })
+            .catch(() =>
+              console.log("quoted message not found in " + channel.name)
+            );
         });
       };
 
