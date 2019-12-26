@@ -27,8 +27,8 @@ client.on("message", message => {
         console.log("current server is " + message.guild);
         // This console.log works:
         // console.log("Channel List: " + message.guild.channels.array());
-        message.guild.channels.map(channel => {
-          channel
+        message.guild.channels.map(_channel => {
+          _channel.channel
             .fetchMessage(args[0])
             .then(message => {
               originalChannel.send(
