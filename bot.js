@@ -45,6 +45,23 @@ client.on("message", message => {
         // console.log("current server is " + message.guild);
         // This console.log works:
         console.log(message.guild.channels.array());
+        let channelist = [];
+
+        message.guild.channels.map(_channel => {
+          channelist.push(_channel.id);
+        });
+
+        for (i = 0; i < channelist.length; i++) {
+          msg = client.channels
+            .get(channelist[i])
+            .fetchMessage(args[0])
+            .catch(error => {
+              return error.code == 10008
+                ? console.log("not found in " + _channel.name)
+                : error.code;
+            });
+          sEmbed(msg);
+        }
         // message.guild.channels.map(_channel => {
         //   const fetched = _channel.fetchMessage(args[0]).catch(error => {
         //     return error.code == 10008
