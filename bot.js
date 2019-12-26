@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
-client.on("message", async message => {
+client.on("message", message => {
   if (message.author.bot) return;
   if (message.content.indexOf(config.prefix) !== 0) return;
   let prefix = config.prefix;
@@ -20,7 +20,7 @@ client.on("message", async message => {
     );
 
     const originalChannel = message.channel;
-    const sEmbed = (msg) => {
+    const sEmbed = msg => {
       originalChannel.send(
         msg.url,
         new Discord.RichEmbed()
@@ -28,27 +28,30 @@ client.on("message", async message => {
           .setColor(0xc736e5)
           .setDescription(msg.content)
           .setTimestamp(msg.createdTimestamp)
-      )
-    }
+      );
+    };
 
     if (args[0] === "?") {
       console.log("Quote command help requested at " + originalChannel);
       originalChannel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
-      const searchOtherChannels = async () => {
+      const searchOtherChannels = () => {
         console.log("current server is " + message.guild);
         // This console.log works:
         // console.log("Channel List: " + message.guild.channels.array());
         message.guild.channels.map(_channel => {
-          const fetched = await _channel.fetchMessage(args[0]).catch(error =>{return error.code==10008?console.log("not found in "+_channel.name):error.code})
+          const fetched = _channel.fetchMessage(args[0]).catch(error => {
+            return error.code == 10008
+              ? console.log("not found in " + _channel.name)
+              : error.code;
+          });
           sEmbed(fetched);
         });
       };
 
       originalChannel
         .fetchMessage(args[0])
-        .then(message => sEmbed(message)
-        )
+        .then(message => sEmbed(message))
         .catch(error => {
           if (error.code == 10008) {
             searchOtherChannels();
