@@ -44,7 +44,7 @@ client.on("message", message => {
       const searchOtherChannels = () => {
         // console.log("current server is " + message.guild);
         // This console.log works:
-        console.log("Channel List: " + message.guild.channels.array());
+        console.log(message.guild.channels.array());
         // message.guild.channels.map(_channel => {
         //   const fetched = _channel.fetchMessage(args[0]).catch(error => {
         //     return error.code == 10008
