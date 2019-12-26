@@ -13,21 +13,23 @@ client.on("message", message => {
   let command = args.shift().toLowerCase();
 
   if (command === "quote") {
-    console.log(
-      "Initiated Quote command. \n",
-      `${args[0] === "?" ? "" : "Quoting messageId " + args[0]} \n`,
-      `sending to channel ${message.channel.name} in ${message.guild}`
-    );
+    // console.log(
+    //   "Initiated Quote command. \n",
+    //   `${args[0] === "?" ? "" : "Quoting messageId " + args[0]} \n`,
+    //   `sending to channel ${message.channel.name} in ${message.guild}`
+    // );
 
     const originalChannel = message.channel;
     const sEmbed = msg => {
+      console.log(msg.content);
       originalChannel.send(
-        msg.url,
-        new Discord.RichEmbed()
-          .setAuthor(msg.author.username, msg.author.avatarURL)
-          .setColor(0xc736e5)
-          .setDescription(msg.content)
-          .setTimestamp(msg.createdTimestamp)
+        msg.url
+        // ,
+        // new Discord.RichEmbed()
+        //   .setAuthor(msg.author.username, msg.author.avatarURL)
+        //   .setColor(0xc736e5)
+        //   .setDescription(msg.content)
+        //   .setTimestamp(msg.createdTimestamp)
       );
     };
 
@@ -36,7 +38,7 @@ client.on("message", message => {
       originalChannel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
       const searchOtherChannels = () => {
-        console.log("current server is " + message.guild);
+        // console.log("current server is " + message.guild);
         // This console.log works:
         // console.log("Channel List: " + message.guild.channels.array());
         message.guild.channels.map(_channel => {
