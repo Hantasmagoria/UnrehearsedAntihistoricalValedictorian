@@ -27,13 +27,12 @@ client.on("message", message => {
         return;
       }
       originalChannel.send(
-        msg.url
-        // ,
-        // new Discord.RichEmbed()
-        //   .setAuthor(msg.author.username, msg.author.avatarURL)
-        //   .setColor(0xc736e5)
-        //   .setDescription(msg.content)
-        //   .setTimestamp(msg.createdTimestamp)
+        msg.url,
+        new Discord.RichEmbed()
+          .setAuthor(msg.author.username, msg.author.avatarURL)
+          .setColor(0xc736e5)
+          .setDescription(msg.content)
+          .setTimestamp(msg.createdTimestamp)
       );
     };
 
