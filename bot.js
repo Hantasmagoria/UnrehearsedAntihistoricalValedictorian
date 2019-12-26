@@ -54,15 +54,19 @@ client.on("message", message => {
         // console.log(channelist);
         // console.log(client.channels.array());
         for (i = 0; i < channelist.length; i++) {
-          findmsg = client.channels.get(channelist[i]);
-          if (findmsg && findmsg.type == "text") {
-            console.log(findmsg);
-            fetchmsg = findmsg.fetchMessage(args[0]).catch(error => {
-              return error.code == 10008
-                ? console.log("not found in " + channelist[i])
-                : error.code;
-            });
-            sEmbed(fetchmsg);
+          findchannel = client.channels.get(channelist[i]);
+          if (findchannel && findchannel.type == "text") {
+            // console.log(findmsg);
+            findchannel
+              .fetchMessage(args[0])
+              .then(fetchedmsg => {
+                sEmbed(fetchedmsg);
+              })
+              .catch(error => {
+                return error.code == 10008
+                  ? console.log("not found in " + channelist[i])
+                  : error.code;
+              });
           }
         }
         // message.guild.channels.map(_channel => {
