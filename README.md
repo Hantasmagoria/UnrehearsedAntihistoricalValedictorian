@@ -15,7 +15,7 @@
 
 ## Current Features
 
-- Quoting a message in the same channel using message ID
+- Quoting a message within a server using message ID
 
 ## Usage
 
