@@ -19,11 +19,12 @@ client.on("message", message => {
     );
     const originalChannel = message.channel;
     if (args[0] === "?") {
-      console.log("Quote command help requested at " + message.channel);
-      message.channel.send("Example usage: ```>quote 645305062230589450 ```");
+      console.log("Quote command help requested at " + originalChannel);
+      originalChannel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
       const searchOtherChannels = () => {
         console.log("current server is " + message.guild);
+        console.log("channel list: " + message.guild.channels);
         for (const channel in message.guild.channels) {
           const element = message.guild.channels[channel];
           console.log(element);
@@ -34,14 +35,12 @@ client.on("message", message => {
         .fetchMessage(args[0])
         .then(message =>
           originalChannel.send(
-            "test" +
-              new Discord.RichEmbed()
-                .setTitle("Quote from " + message.author.username)
-                .setAuthor(message.author.username, message.author.avatarURL)
-                .setColor(0xc736e5)
-                .setDescription(message.content)
-                .setTimestamp(message.createdTimestamp)
-            // .setURL(message.url) removed to see if the link is still there
+            message.url,
+            new Discord.RichEmbed()
+              .setAuthor(message.author.username, message.author.avatarURL)
+              .setColor(0xc736e5)
+              .setDescription(message.content)
+              .setTimestamp(message.createdTimestamp)
           )
         )
         .catch(error => {
