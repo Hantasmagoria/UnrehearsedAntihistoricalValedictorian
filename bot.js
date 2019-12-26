@@ -17,30 +17,30 @@ client.on("message", message => {
       `${args[0] === "?" ? "" : "Quoting messageId " + args[0]} \n`,
       `sending to channel ${message.channel.name} in ${message.guild}`
     );
+    const originalChannel = message.channel;
     if (args[0] === "?") {
       console.log("Quote command help requested at " + message.channel);
       message.channel.send("Example usage: ```>quote 645305062230589450 ```");
     } else if (typeof parseInt(args[0]) === "number") {
       const searchOtherChannels = () => {
-        console.log("current server is " + message.channel.guild);
-        for (const channel in message.channel.guild.channels) {
-          if (message.channel.guild.channels.hasOwnProperty(channel)) {
-            const element = message.channel.guild.channels[channel];
-            console.log(element);
-          }
+        console.log("current server is " + message.guild);
+        for (const channel in message.guild.channels) {
+          const element = message.guild.channels[channel];
+          console.log(element);
         }
       };
 
-      message.channel
+      originalChannel
         .fetchMessage(args[0])
         .then(message =>
-          message.channel.send(
-            new Discord.RichEmbed()
-              .setTitle("Quote from " + message.author.username)
-              .setAuthor(message.author.username, message.author.avatarURL)
-              .setColor(0xc736e5)
-              .setDescription(message.content)
-              .setTimestamp(message.createdTimestamp)
+          originalChannel.send(
+            "test" +
+              new Discord.RichEmbed()
+                .setTitle("Quote from " + message.author.username)
+                .setAuthor(message.author.username, message.author.avatarURL)
+                .setColor(0xc736e5)
+                .setDescription(message.content)
+                .setTimestamp(message.createdTimestamp)
             // .setURL(message.url) removed to see if the link is still there
           )
         )
