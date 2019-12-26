@@ -55,7 +55,7 @@ client.on("message", message => {
         // console.log(client.channels.array());
         for (i = 0; i < channelist.length; i++) {
           findmsg = client.channels.get(channelist[i]);
-          if (findmsg) {
+          if (findmsg && findmsg.type == "text") {
             console.log(findmsg);
             fetchmsg = findmsg.fetchMessage(args[0]).catch(error => {
               return error.code == 10008
