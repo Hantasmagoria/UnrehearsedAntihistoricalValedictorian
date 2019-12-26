@@ -25,8 +25,11 @@ client.on("message", message => {
     } else if (typeof parseInt(args[0]) === "number") {
       const searchOtherChannels = () => {
         console.log("current server is " + message.guild);
-        console.log("channel list: ");
-        console.log(message.guild.channels.array());
+        // This console.log works:
+        // console.log("Channel List: " + message.guild.channels.array());
+        message.guild.channels.map(channel => {
+          console.log(channel.name);
+        });
       };
 
       originalChannel
