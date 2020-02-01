@@ -4,6 +4,8 @@ const config = require("./config.json");
 
 client.on("error", console.error);
 
+client.music = require("discord.js-musicbot-addon");
+
 client.on("message", message => {
   if (message.author.bot) return;
   if (message.content.indexOf(config.prefix) !== 0) return;
@@ -66,6 +68,11 @@ client.on("message", message => {
         });
     }
   }
+});
+
+client.music.start(bot, {
+  youtubekey: process.env.BOT_YOUTUBE_TOKEN,
+  botPrefix: config.prefix
 });
 
 client
