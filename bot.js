@@ -2,6 +2,8 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
+const ytToken = process.env.BOT_YOUTUBE_TOKEN;
+
 client.on("error", console.error);
 
 client.music = require("discord.js-musicbot-addon");
@@ -71,15 +73,11 @@ client.on("message", message => {
 });
 
 client.music.start(client, {
-  youtubekey: process.env.BOT_YOUTUBE_TOKEN,
+  youtubekey: ytToken,
   botPrefix: config.prefix
 });
 
 client
   .login(`${process.env.BOT_TOKEN}`)
-  .then(
-    console.log(
-      "I am ready! " + "Youtube token = " + process.env.BOT_YOUTUBE_TOKEN
-    )
-  )
+  .then(console.log("I am ready! " + "Youtube token = " + ytToken))
   .catch(console.error);
