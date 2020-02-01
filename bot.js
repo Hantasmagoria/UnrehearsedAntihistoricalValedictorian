@@ -70,7 +70,7 @@ client.on("message", message => {
   }
 });
 
-client.music.start(bot, {
+client.music.start(client, {
   youtubekey: process.env.BOT_YOUTUBE_TOKEN,
   botPrefix: config.prefix
 });
