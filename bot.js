@@ -73,7 +73,7 @@ client.on("message", message => {
 });
 
 client.music.start(client, {
-  youtubekey: `${ytToken}`,
+  youtubeKey: `${ytToken}`,
   botPrefix: `${config.prefix}`,
   anyoneCanSkip: true,
   cooldown: {
@@ -83,5 +83,5 @@ client.music.start(client, {
 
 client
   .login(`${process.env.BOT_TOKEN}`)
-  .then(console.log("I am ready! " + "Youtube token = " + ytToken))
+  .then(console.log("I am ready! "))
   .catch(console.error);
