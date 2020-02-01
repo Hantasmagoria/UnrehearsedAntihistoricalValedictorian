@@ -73,7 +73,7 @@ client.on("message", message => {
 });
 
 client.music.start(client, {
-  youtubekey: `${ytToken}`,
+  youtubeKey: `${ytToken}`,
   botPrefix: `${config.prefix}`,
   anyoneCanSkip: true,
   cooldown: {
