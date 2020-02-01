@@ -77,5 +77,9 @@ client.music.start(client, {
 
 client
   .login(`${process.env.BOT_TOKEN}`)
-  .then(console.log("I am ready!"))
+  .then(
+    console.log(
+      "I am ready! " + "Youtube token = " + process.env.BOT_YOUTUBE_TOKEN
+    )
+  )
   .catch(console.error);
