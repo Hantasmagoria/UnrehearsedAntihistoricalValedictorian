@@ -2,25 +2,25 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
-const ytToken = process.env.BOT_YOUTUBE_TOKEN;
+
+const botToken = config.BOT_TOKEN || process.env.BOT_TOKEN;
+
+const ytToken = config.BOT_YOUTUBE_TOKEN || process.env.BOT_YOUTUBE_TOKEN;
 
 client.on("error", console.error);
 
 client.music = require("discord.js-musicbot-addon");
 
-client.on("message", message => {
+client.on("message", (message) => {
   if (message.author.bot) return;
   if (message.content.indexOf(config.prefix) !== 0) return;
   let prefix = config.prefix;
-  let args = message.content
-    .slice(prefix.length)
-    .trim()
-    .split(/ +/g);
+  let args = message.content.slice(prefix.length).trim().split(/ +/g);
   let command = args.shift().toLowerCase();
 
   if (command === "quote") {
     const originalChannel = message.channel;
-    const sEmbed = msg => {
+    const sEmbed = (msg) => {
       if (!msg.content) {
         return;
       }
@@ -41,7 +41,7 @@ client.on("message", message => {
       const searchOtherChannels = () => {
         let channelist = [];
 
-        message.guild.channels.map(_channel => {
+        message.guild.channels.map((_channel) => {
           channelist.push(_channel.id);
         });
 
@@ -50,10 +50,10 @@ client.on("message", message => {
           if (findchannel && findchannel.type == "text") {
             findchannel
               .fetchMessage(args[0])
-              .then(fetchedmsg => {
+              .then((fetchedmsg) => {
                 sEmbed(fetchedmsg);
               })
-              .catch(error => {
+              .catch((error) => {
                 return error.code;
               });
           }
@@ -62,8 +62,8 @@ client.on("message", message => {
 
       originalChannel
         .fetchMessage(args[0])
-        .then(message => sEmbed(message))
-        .catch(error => {
+        .then((message) => sEmbed(message))
+        .catch((error) => {
           if (error.code == 10008) {
             searchOtherChannels();
           }
@@ -77,11 +77,12 @@ client.music.start(client, {
   botPrefix: `${config.prefix}`,
   anyoneCanSkip: true,
   cooldown: {
-    enabled: false
-  }
+    enabled: false,
+  },
 });
 
 client
-  .login(`${process.env.BOT_TOKEN}`)
-  .then(console.log("I am ready! "))
+  .login(`${botToken}`)
+  .then(console.log("I am ready!"))
+
   .catch(console.error);
