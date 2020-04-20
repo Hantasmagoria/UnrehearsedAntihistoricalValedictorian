@@ -1,4 +1,4 @@
-# :wave: [UAV discord bot](https://github.com/Hantasmagoria/UnrehearsedAutomaticVentriloquist) :egg:
+# :wave: [UAV discord bot](https://github.com/Hantasmagoria/UnrehearsedAntihistoricalValedictorian) :egg:
 
 > Discord bot catered for the needs of the Invictus discord server
 
@@ -11,7 +11,25 @@
 
 ## Installation
 
-[Click Here](https://discordapp.com/oauth2/authorize?client_id=642691015060488203&scope=bot&permissions=8) to invite the bot to your server!
+UAV requires Node.js to run.
+
+create a config.json with required values:
+
+```
+{
+  "prefix": ">",
+  "BOT_YOUTUBE_TOKEN": "<insert BOT_YOUTUBE_TOKEN>",
+  "BOT_TOKEN": "<insert BOT_TOKEN>"
+}
+```
+
+Install the dependencies and start the bot.
+
+```
+cd UnrehearsedAntihistoricalValedictorian
+npm install
+npm start
+```
 
 ## Current Features
 
