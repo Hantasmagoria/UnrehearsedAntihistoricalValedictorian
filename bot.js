@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 
+
 const botToken = config.BOT_TOKEN || process.env.BOT_TOKEN;
 
 const ytToken = config.BOT_YOUTUBE_TOKEN || process.env.BOT_YOUTUBE_TOKEN;
@@ -83,4 +84,5 @@ client.music.start(client, {
 client
   .login(`${botToken}`)
   .then(console.log("I am ready!"))
+
   .catch(console.error);
